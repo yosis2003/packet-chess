@@ -22,9 +22,9 @@ bool King::hasMoved(){
     }
 }
 
-King::King(Vector2f pos, int passedColor){
+King::King(Vector2f pos, int passedColor) : ChessPiece(pos, passedColor){
     color = passedColor;
-    King1.getColor();
+    getColor();
 }
 bool Pawn::hasMoved(){
     if (moved == true){
