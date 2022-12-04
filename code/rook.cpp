@@ -7,6 +7,7 @@ using namespace std;
 
 bool Rook::hasMoved(){
     if (moved == true || (getPosition() != getLastPos())){
+        moved = true;
         return true;
     }
     else{
@@ -20,6 +21,8 @@ bool Rook::isLegal(Vector2f testPos){
     }
 }
 Rook::Rook(Vector2f pos, int passedColor)  : ChessPiece(pos, passedColor){
+    prevPos = pos;
     position = pos;
     color = passedColor;
+    value = 5;
 }

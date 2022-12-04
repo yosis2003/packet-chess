@@ -8,10 +8,10 @@ using namespace sf;
 class ChessPiece
 {
     private:
-    int value = 0;
     vector <Vector2f> legalMoves;
     Sprite chessSprite;
     protected:
+    int value = 0;
     int color = 0;
     Vector2f position;
     Vector2f prevPos;

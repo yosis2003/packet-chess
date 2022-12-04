@@ -14,6 +14,8 @@ bool Queen::isLegal(Vector2f testPos){
 }
 
 Queen::Queen(Vector2f pos, int passedColor) : ChessPiece(pos, passedColor){
+    prevPos = pos;
     position = pos;
     color = passedColor;
+    value = 9;
 }

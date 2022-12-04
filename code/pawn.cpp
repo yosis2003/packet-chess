@@ -23,8 +23,10 @@ bool Pawn::isLegal(Vector2f testPos){
 }
 
 Pawn::Pawn(Vector2f pos, int passedColor) : ChessPiece(pos, passedColor){
+    prevPos = pos;
     color = passedColor;
     position == pos;
+    value = 1;
 }
 
 bool Pawn::hasDoubleMoved(){
