@@ -8,11 +8,12 @@ class ChessPiece
 {
     private:
     int value = 0;
-    Vector2f position;
     Vector2f prevPos;
     vector <Vector2f> legalMoves;
     Sprite chessSprite;
+    protected:
     int color = 0;
+    Vector2f position;
 
     public:
     virtual bool isLegal(Vector2f testPos) = 0;
@@ -21,4 +22,5 @@ class ChessPiece
     Vector2f getLastPos();
     int getValue();
     int getColor();
+
 };

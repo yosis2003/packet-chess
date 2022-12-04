@@ -3,10 +3,11 @@
 class King : public ChessPiece
 {
     private:
-    bool moved;
+    bool moved; //the king piece has moved only if current pos is different from lastPos
+    bool inCheck = false;
 
     public:
-    King(Vector2f pos, int colovvvvvvvvvvvvvvvvvr);
+    King(Vector2f pos, int color);
     bool isLegal(Vector2f testPos); //Try the override keyword later
     bool hasMoved();
 };

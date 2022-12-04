@@ -3,3 +3,17 @@
 
 using namespace sf;
 using namespace std;
+
+Knight::Knight(Vector2f pos, int passedColor) : ChessPiece(pos, passedColor){ 
+    position = pos;
+    color = passedColor;
+}
+bool Knight::isLegal(Vector2f testPos){
+    if (abs(testPos.x - getLastPos().x == 2) && abs(testPos.y - getLastPos().y == 1) || (abs(testPos.x - getLastPos().x) == 1) && (abs(testPos.y - getLastPos().y) == 2)){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
