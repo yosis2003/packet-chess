@@ -5,7 +5,7 @@ using namespace sf;
 
 
 bool Queen::isLegal(Vector2f testPos){
-    if (abs(testPos.x) == abs(testPos.y)){
+    if (abs(testPos.x) == abs(testPos.y) || (getLastPos().x == testPos.x || getLastPos().y == testPos.y)){
         return true;
     }
     else{

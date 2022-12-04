@@ -1,3 +1,4 @@
+#pragma once
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
@@ -8,12 +9,12 @@ class ChessPiece
 {
     private:
     int value = 0;
-    Vector2f prevPos;
     vector <Vector2f> legalMoves;
     Sprite chessSprite;
     protected:
     int color = 0;
     Vector2f position;
+    Vector2f prevPos;
 
     public:
     virtual bool isLegal(Vector2f testPos) = 0;
