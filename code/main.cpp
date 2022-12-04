@@ -12,6 +12,7 @@ using namespace std;
 
 int main(){
 
+    // Window Management
     float windowScale = 1.0f;
     int currentWindowWidth = VideoMode::getDesktopMode().width*windowScale;
     int currentWindowHeight = VideoMode::getDesktopMode().height*windowScale;
@@ -19,9 +20,19 @@ int main(){
     float aspect_ratio = currentWindowHeight / static_cast<float>(currentWindowWidth);
     RenderWindow window(desktop, "Packet Chess", Style::Default);
 
-    //FONT SECTION
+    // Text Management
+    const int TB_Align_W = 2;
+    const int TB_Align_H = 7;
 
-    //TEXT BOX SECTION
+    Font font;
+    font.loadFromFile("fonts/SebastianSerifNbp-7weB.ttf");
+    Text titleScreen;
+    titleScreen.setFont(font);
+    titleScreen.setPosition({currentWindowWidth*0.5f, currentWindowHeight*0.4f});
+    const int TB_BackBorder = 5;
+    RectangleShape textBoxBg;
+    textBoxBg.setFillColor(Color(0,0,0,127));
+    textBoxBg.setPosition({titleScreen.getPosition().x - TB_Align_W - TB_BackBorder, titleScreen.getPosition().y + TB_Align_H - TB_BackBorder });
 
     //VERTEX ARRAY STUFF
 
@@ -76,6 +87,8 @@ int main(){
         |___|****                          ****|___|
         ********************************************
         \*----------------------------------------*/
+        
+        titleScreen.setString("Welcome To\nPacket Chess!!");
 
 
 
@@ -90,7 +103,16 @@ int main(){
         \*--------------------------------------*/
 
         window.clear(sf::Color(50, 50, 50, 255));
+
         //DRAW STUFF
+        titleScreen.setPosition({currentWindowWidth*0.5f, currentWindowHeight*0.4f});
+        titleScreen.setOrigin({(titleScreen.getLocalBounds().width)/2, (titleScreen.getLocalBounds().height)/2 });
+        textBoxBg.setPosition({titleScreen.getPosition().x - TB_Align_W - TB_BackBorder, titleScreen.getPosition().y + TB_Align_H - TB_BackBorder });
+        textBoxBg.setSize({titleScreen.getLocalBounds().width + TB_BackBorder*2 , titleScreen.getLocalBounds().height + TB_BackBorder*2});
+        textBoxBg.setOrigin({(titleScreen.getLocalBounds().width)/2, (titleScreen.getLocalBounds().height)/2});
+        window.draw(textBoxBg);
+        window.draw(titleScreen);
+
         window.display();
 
     }
