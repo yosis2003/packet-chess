@@ -12,8 +12,46 @@ using namespace std;
 
 int main(){
 
-    VideoMode vm (1920, 1080);
-    RenderWindow(vm, "Packet Chess", Style::Default);
-    
+    float windowScale = 1.0f;
+    int currentWindowWidth = VideoMode::getDesktopMode().width*windowScale;
+    int currentWindowHeight = VideoMode::getDesktopMode().height*windowScale;
+    VideoMode desktop(currentWindowWidth, currentWindowHeight);
+    float aspect_ratio = currentWindowHeight / static_cast<float>(currentWindowWidth);
+    RenderWindow window(desktop, "Packet Chess", Style::Default);
+
+    //FONT SECTION
+
+    //TEXT BOX SECTION
+
+    //VERTEX ARRAY STUFF
+
+
+    /*----------------------------------*\
+    **************************************
+    |___|****                    ****|___|
+    !!!!!***                      ***!!!!!
+    |___|**     Main Game Loop     **|___|
+    !!!!!***                      ***!!!!!
+    |___|****                    ****|___|
+    **************************************
+    \*----------------------------------*/
+
+    while(window.isOpen())
+    {
+        Event event;
+
+        while(window.pollEvent(event))
+        {
+            switch(event.type)
+            {
+                case Event::Closed:
+                {
+                    
+                }
+            }
+        }
+    }
+
+    return 0;
 
 }
