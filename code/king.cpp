@@ -1,10 +1,6 @@
 #include "King.h"
-#include "Pawn.h"
-#include "Queen.h"
-#include "Rook.h"
-#include "Knight.h"
 #include "ChessPiece.h"
-#include "Bishop.h"
+
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>

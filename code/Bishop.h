@@ -1,6 +1,6 @@
 #include "ChessPiece.h"
 
-class Bishop
+class Bishop : public ChessPiece
 {
     public:
     Bishop(Vector2f pos, int color);

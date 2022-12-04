@@ -1,6 +1,6 @@
 #include "ChessPiece.h"
 
-class Pawn
+class Pawn : public ChessPiece
 {
     private:
     bool moved;

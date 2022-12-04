@@ -7,8 +7,10 @@ using namespace std;
 
 class BoardState{
     public:
+    vector<ChessPiece*> Board;
+    int getTurn();
+    int getBoardValue();
+    private:
     int boardValue = 0;
     int turn = 0;
-    vector<ChessPiece*> Board;
-    
 };
