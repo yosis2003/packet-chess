@@ -17,6 +17,7 @@ class ChessPiece
     public:
     virtual bool isLegal(Vector2f testPos) = 0;
     Vector2f getPosition();
+    ChessPiece(Vector2f positioning, int coloring);
     Vector2f getLastPos();
     int getValue();
     int getColor();
