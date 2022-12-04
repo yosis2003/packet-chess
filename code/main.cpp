@@ -34,7 +34,11 @@ int main(){
     textBoxBg.setFillColor(Color(0,0,0,127));
     textBoxBg.setPosition({titleScreen.getPosition().x - TB_Align_W - TB_BackBorder, titleScreen.getPosition().y + TB_Align_H - TB_BackBorder });
 
-    //VERTEX ARRAY STUFF
+    // Sprites
+    Texture ChessBoardTexture;
+    ChessBoardTexture.loadFromFile("packet Chess Sprites/Chess Board.png");
+    Sprite ChessBoardSprite;
+    ChessBoardSprite.setTexture(ChessBoardTexture);
 
 
     /*----------------------------------*\
@@ -88,7 +92,7 @@ int main(){
         ********************************************
         \*----------------------------------------*/
         
-        titleScreen.setString("Welcome To\nPacket Chess!!");
+        titleScreen.setString("Packet Chess!!");
 
 
 
@@ -104,14 +108,27 @@ int main(){
 
         window.clear(sf::Color(50, 50, 50, 255));
 
-        //DRAW STUFF
-        titleScreen.setPosition({currentWindowWidth*0.5f, currentWindowHeight*0.4f});
+        // TITLE
+        const int titleSizeMult = 2;
+        titleScreen.setPosition({currentWindowWidth*0.5f, currentWindowHeight*0.05f});
         titleScreen.setOrigin({(titleScreen.getLocalBounds().width)/2, (titleScreen.getLocalBounds().height)/2 });
+        titleScreen.setScale(titleSizeMult, titleSizeMult);
         textBoxBg.setPosition({titleScreen.getPosition().x - TB_Align_W - TB_BackBorder, titleScreen.getPosition().y + TB_Align_H - TB_BackBorder });
         textBoxBg.setSize({titleScreen.getLocalBounds().width + TB_BackBorder*2 , titleScreen.getLocalBounds().height + TB_BackBorder*2});
         textBoxBg.setOrigin({(titleScreen.getLocalBounds().width)/2, (titleScreen.getLocalBounds().height)/2});
+        textBoxBg.setScale(titleSizeMult, titleSizeMult);
         window.draw(textBoxBg);
         window.draw(titleScreen);
+
+        // Board
+        const int chessBoardScale = 1;
+        ChessBoardSprite.setOrigin((ChessBoardSprite.getLocalBounds().width)/2, (ChessBoardSprite.getLocalBounds().height)/2);
+        ChessBoardSprite.setPosition({currentWindowWidth*0.5f, currentWindowHeight*0.5f});
+        ChessBoardSprite.setScale(chessBoardScale, chessBoardScale);
+        window.draw(ChessBoardSprite);
+
+        // Chess Pieces
+
 
         window.display();
 
