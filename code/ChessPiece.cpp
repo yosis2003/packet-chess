@@ -25,3 +25,6 @@ int ChessPiece::getColor(){
 bool ChessPiece::isLegal(Vector2f testPos){
 
 }
+Sprite ChessPiece::getSprite(){
+    return chessSprite;
+}
