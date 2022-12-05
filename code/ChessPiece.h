@@ -9,8 +9,8 @@ class ChessPiece
 {
     private:
     vector <Vector2f> legalMoves;
-    Sprite chessSprite;
     protected:
+    Sprite chessSprite;
     int value = 0;
     int color = 0;
     Vector2f position;

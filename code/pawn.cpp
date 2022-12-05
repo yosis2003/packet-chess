@@ -22,11 +22,12 @@ bool Pawn::isLegal(Vector2f testPos){
     }
 }
 
-Pawn::Pawn(Vector2f pos, int passedColor) : ChessPiece(pos, passedColor){
+Pawn::Pawn(Vector2f pos, int passedColor, Sprite sprite) : ChessPiece(pos, passedColor){
     prevPos = pos;
     color = passedColor;
     position == pos;
     value = 1;
+    chessSprite = sprite;
 }
 
 bool Pawn::hasDoubleMoved(){

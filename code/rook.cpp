@@ -20,9 +20,10 @@ bool Rook::isLegal(Vector2f testPos){
         return true;
     }
 }
-Rook::Rook(Vector2f pos, int passedColor)  : ChessPiece(pos, passedColor){
+Rook::Rook(Vector2f pos, int passedColor, Sprite sprite)  : ChessPiece(pos, passedColor){
     prevPos = pos;
     position = pos;
     color = passedColor;
     value = 5;
+    chessSprite = sprite;
 }

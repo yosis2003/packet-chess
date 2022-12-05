@@ -19,11 +19,12 @@ bool King::hasMoved(){
     }
 }
 
-King::King(Vector2f pos, int passedColor) : ChessPiece(pos, passedColor){
+King::King(Vector2f pos, int passedColor, Sprite sprite) : ChessPiece(pos, passedColor){
     prevPos = pos;
     color = passedColor;
     position = pos;
     value = 50;
+    chessSprite = sprite;
     
 }
 bool King::isLegal(Vector2f testPos){

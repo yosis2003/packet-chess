@@ -8,7 +8,7 @@ class Pawn : public ChessPiece
     bool doublemoved;
 
     public:
-    Pawn(Vector2f pos, int color);
+    Pawn(Vector2f pos, int color, Sprite sprite);
     bool hasMoved();
     bool hasDoubleMoved();
     bool isLegal(Vector2f testPos); //Try the override keyword later

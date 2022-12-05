@@ -34,6 +34,16 @@ int main(){
     textBoxBg.setFillColor(Color(0,0,0,127));
     textBoxBg.setPosition({titleScreen.getPosition().x - TB_Align_W - TB_BackBorder, titleScreen.getPosition().y + TB_Align_H - TB_BackBorder });
 
+    Texture ChessBoardTexture;
+    ChessBoardTexture.loadFromFile("packet Chess Sprites/Chess Board.png");
+    Sprite ChessBoardSprite;
+    ChessBoardSprite.setTexture(ChessBoardTexture);
+    const int chessBoardScale = 1;
+    ChessBoardSprite.setOrigin((ChessBoardSprite.getLocalBounds().width)/2, (ChessBoardSprite.getLocalBounds().height)/2);
+    ChessBoardSprite.setPosition({currentWindowWidth*0.5f, currentWindowHeight*0.5f});
+    ChessBoardSprite.setScale(chessBoardScale, chessBoardScale);
+
+
     // Sprites
     Texture ChessBoardTexture;
     Texture WhiteKingTexture;
@@ -63,7 +73,6 @@ int main(){
     WhitePawnTexture.loadFromFile("packet Chess Sprites/White_Pawn.png");
     WhitePawnTexture.loadFromFile("packet Chess Sprites/Black_Pawn.png");
 
-    Sprite ChessBoardSprite;
     Sprite WhiteKingSprite;
     Sprite BlackKingSprite;
     Sprite WhiteQueenSprite;
@@ -77,7 +86,6 @@ int main(){
     Sprite WhitePawnSprite;
     Sprite BlackPawnSprite;
 
-    ChessBoardSprite.setTexture(ChessBoardTexture);
     WhiteKingSprite.setTexture(WhiteKingTexture);
     BlackKingSprite.setTexture(BlackKingTexture);
     WhiteQueenSprite.setTexture(WhiteQueenTexture);
@@ -91,10 +99,8 @@ int main(){
     WhitePawnSprite.setTexture(WhitePawnTexture);
     BlackPawnSprite.setTexture(BlackPawnTexture);
 
-    const int chessBoardScale = 1;
     const int chessPieceScale = 2;
-
-    ChessBoardSprite.setOrigin((ChessBoardSprite.getLocalBounds().width)/2, (ChessBoardSprite.getLocalBounds().height)/2);
+    
     WhiteKingSprite.setOrigin((WhiteKingSprite.getLocalBounds().width)/2, (WhiteKingSprite.getLocalBounds().height)/2);
     BlackKingSprite.setOrigin((BlackKingSprite.getLocalBounds().width)/2, (BlackKingSprite.getLocalBounds().height)/2);
     WhiteQueenSprite.setOrigin((WhiteQueenSprite.getLocalBounds().width)/2, (WhiteQueenSprite.getLocalBounds().height)/2);
@@ -107,22 +113,7 @@ int main(){
     BlackRookSprite.setOrigin((BlackRookSprite.getLocalBounds().width)/2, (BlackRookSprite.getLocalBounds().height)/2);
     WhitePawnSprite.setOrigin((WhitePawnSprite.getLocalBounds().width)/2, (WhitePawnSprite.getLocalBounds().height)/2);
     BlackPawnSprite.setOrigin((BlackPawnSprite.getLocalBounds().width)/2, (BlackPawnSprite.getLocalBounds().height)/2);
-
-    ChessBoardSprite.setPosition({currentWindowWidth*0.5f, currentWindowHeight*0.5f});
-    WhiteKingSprite.setPosition(100, 100);
-    BlackKingSprite.setPosition(180, 100);
-    WhiteQueenSprite.setPosition(100, 180);
-    BlackQueenSprite.setPosition(180, 180);
-    WhiteBishopSprite.setPosition(100, 260);
-    BlackBishopSprite.setPosition(180, 260);
-    WhiteKnightSprite.setPosition(100, 340);
-    BlackKnightSprite.setPosition(180, 340);
-    WhiteRookSprite.setPosition(100, 420);
-    BlackRookSprite.setPosition(180, 420);
-    WhitePawnSprite.setPosition(100, 500);
-    BlackPawnSprite.setPosition(180, 500);
-
-    ChessBoardSprite.setScale(chessBoardScale, chessBoardScale);
+    
     WhiteKingSprite.setScale(chessPieceScale, chessPieceScale);
     BlackKingSprite.setScale(chessPieceScale, chessPieceScale);
     WhiteQueenSprite.setScale(chessPieceScale, chessPieceScale);
@@ -220,20 +211,6 @@ int main(){
 
         // Board
         window.draw(ChessBoardSprite);
-
-        // Chess Pieces
-        window.draw(WhiteKingSprite);
-        window.draw(BlackKingSprite);
-        window.draw(WhiteQueenSprite);
-        window.draw(BlackQueenSprite);
-        window.draw(WhiteBishopSprite);
-        window.draw(BlackBishopSprite);
-        window.draw(WhiteKnightSprite);
-        window.draw(BlackKnightSprite);
-        window.draw(WhiteRookSprite);
-        window.draw(BlackRookSprite);
-        window.draw(WhitePawnSprite);
-        window.draw(BlackPawnSprite);
 
         // Display
         window.display();

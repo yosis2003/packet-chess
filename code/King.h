@@ -8,7 +8,7 @@ class King : public ChessPiece
     bool inCheck = false;
 
     public:
-    King(Vector2f pos, int color);
+    King(Vector2f pos, int color, Sprite sprite);
     bool isLegal(Vector2f testPos); //Try the override keyword later
     bool hasMoved();
 };

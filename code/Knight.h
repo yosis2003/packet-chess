@@ -4,6 +4,6 @@
 class Knight : public ChessPiece
 {
     public:
-    Knight(Vector2f pos, int color);
+    Knight(Vector2f pos, int color, Sprite sprite);
     bool isLegal(Vector2f testPos); //Try the override keyword later
 };
