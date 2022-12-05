@@ -22,9 +22,9 @@ int ChessPiece::getValue(){
 int ChessPiece::getColor(){
     return color;
 }
-bool ChessPiece::isLegal(Vector2f testPos){
+//bool ChessPiece::isLegal(Vector2f testPos){
 
-}
+//}
 Sprite ChessPiece::getSprite(){
     return chessSprite;
 }
