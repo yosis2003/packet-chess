@@ -16,6 +16,7 @@
 #include "Rook.h"
 #include "Pawn.h"
 #include "Sprites.h"
+#include "Tile.h"
 using namespace sf;
 using namespace std;
 
@@ -97,10 +98,21 @@ void boardLoaderWhite(vector<ChessPiece*> &CHPV )
     CHPV.push_back(PawnWhiteSeven);
 }
 
-void boardLoader(vector<ChessPiece*> &CHPV)
+void tileLoaderTop()
+{
+    Tile tileZoro(Vector2f());
+}
+void tileLoaderBottom()
+{
+
+}
+
+void boardLoader(vector<ChessPiece*> &CHPV)//, vector <Tile> TV
 {
     boardLoaderBlack(CHPV);
     boardLoaderWhite(CHPV);
+    //tileLoaderTop;
+    //tileLoaderBottom;
 }
 
 void boardDestroyer(vector<ChessPiece*> &CHPV)
@@ -115,12 +127,12 @@ void boardDestroyer(vector<ChessPiece*> &CHPV)
 int main(){
 
     // Window Management
-    float windowScale = 1.0f;
+    float windowScale = 0.8f;
     int currentWindowWidth = VideoMode::getDesktopMode().width*windowScale;
     int currentWindowHeight = VideoMode::getDesktopMode().height*windowScale;
     VideoMode desktop(currentWindowWidth, currentWindowHeight);
     float aspect_ratio = currentWindowHeight / static_cast<float>(currentWindowWidth);
-    RenderWindow window(desktop, "Packet Chess", Style::Default);
+    RenderWindow window(desktop, "Packet Chess", Style::Close);
 
     // Text Management
     const int TB_Align_W = 2;
@@ -269,6 +281,7 @@ int main(){
             Vector2i mousePosition;
             bool mouseButtonHolding = false;
             int chessPieceLocation = -1;
+            vector <Tile> boardTileVector;
 
             // Sound
             Music music;
@@ -306,6 +319,8 @@ int main(){
                         
                         case Event::MouseButtonPressed:
                         {
+                            cout << endl << "x pos: " << Mouse::getPosition().x << endl;
+                            cout << endl << "y pos: " << Mouse::getPosition().y << endl;
                             if(event.mouseButton.button == Mouse::Left)
                             {
                                 mouseButtonHolding = true;
