@@ -239,7 +239,7 @@ int main(){
         Mode gameMode = MULTIPLAYER;
         State gameState = PLAYING;
 
-        while(gameMode == MULTIPLAYER)
+        while(gameMode == MULTIPLAYER && window.isOpen())
         {
             titleScreen.setString("Packet Chess!!");
 
@@ -257,9 +257,11 @@ int main(){
 
             // GAME INITIALIZATION
             BoardState BoardZero;
-            Sprite tempSprite;
+            boardLoader(BoardZero.Board);
+            cout << BoardZero.Board.size();
             
-            while(gameState == PLAYING)
+            
+            while(gameState == PLAYING && window.isOpen())
             {
 
                 while(window.pollEvent(event))
@@ -299,17 +301,7 @@ int main(){
                 ********************************************
                 \*----------------------------------------*/
                 
-
-                boardLoader(BoardZero.Board);
-                cout << BoardZero.Board.size();
-                tempSprite = BoardZero.Board[0]->getSprite();
-                tempSprite.setPosition(50, 50);
-
-                //window.draw(BoardZero.Board[0]->chessSprite); // PROBLEM CHILD
-                
-                
-                
-
+                BoardZero.Board[0]->chessSprite.setPosition(50,50);         
 
                 /*--------------------------------------*\
                 ******************************************
@@ -328,13 +320,13 @@ int main(){
 
                 // Board
                 window.draw(ChessBoardSprite);
-                window.draw(tempSprite);
+                window.draw(BoardZero.Board[0]->chessSprite);
 
                 // Display
                 window.display();
-
-                boardDestroyer(BoardZero.Board);
             }
+            
+            boardDestroyer(BoardZero.Board);
         }
     }
 
