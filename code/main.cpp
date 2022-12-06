@@ -236,6 +236,11 @@ int main(){
             PLAYING, PAUSED, END
         };
 
+        enum MouseState
+        {
+            Holding, Released
+        };
+
         Mode gameMode = MULTIPLAYER;
         State gameState = PLAYING;
 
@@ -259,6 +264,19 @@ int main(){
             BoardState BoardZero;
             boardLoader(BoardZero.Board);
             cout << BoardZero.Board.size();
+            Vector2i mousePosition;
+            MouseState mouseStateOne;
+            vector <ChessPiece*> selectedChessPiece;
+
+            // Sound
+            Music music;
+            if (!music.openFromFile("sounds/packetchessbanger.wav"))
+                return -1;
+            music.setVolume(50);
+            music.play();
+
+            // TEST TRASH
+            BoardZero.Board[0]->chessSprite.setPosition(50,50);
             
             
             while(gameState == PLAYING && window.isOpen())
@@ -284,6 +302,26 @@ int main(){
 
                         //Mouse Button Press Event Stuff
 
+                        case Event::MouseButtonPressed:
+                        {
+                            if(event.mouseButton.button == Mouse::Left)
+                            {
+                                mouseStateOne = Holding;
+                            }
+                            for(int i = 0; i < BoardZero.Board.size(); i++)
+                            {
+                                if(Mouse::getPosition().x >= BoardZero.Board[i]->chessSprite.getPosition().x && Mouse::getPosition().x < (BoardZero.Board[i]->chessSprite.getPosition().x + BoardZero.Board[i]->chessSprite.getLocalBounds().width))
+                                {
+                                    if(Mouse::getPosition().y >= BoardZero.Board[i]->chessSprite.getPosition().y && Mouse::getPosition().y < (BoardZero.Board[i]->chessSprite.getPosition().y + BoardZero.Board[i]->chessSprite.getLocalBounds().height))
+                                    {
+                                        selectedChessPiece.push_back(BoardZero.Board[i]);
+                                    }
+                                }
+                            }
+                            //mousePosition = Mouse::getPosition();
+                            break;
+                        }
+
                         //Mouse Move Event Stuff
 
                         default:
@@ -301,7 +339,10 @@ int main(){
                 ********************************************
                 \*----------------------------------------*/
                 
-                BoardZero.Board[0]->chessSprite.setPosition(50,50);         
+                if(mouseStateOne == Holding)
+                {
+                    selectedChessPiece[0]->chessSprite.setPosition(Mouse::getPosition().x, Mouse::getPosition().y);
+                }
 
                 /*--------------------------------------*\
                 ******************************************
