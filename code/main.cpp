@@ -265,7 +265,7 @@ int main(){
             boardLoader(BoardZero.Board);
             cout << BoardZero.Board.size();
             Vector2i mousePosition;
-            MouseState mouseStateOne;
+            MouseState mouseStateOne = Released;
             vector <ChessPiece*> selectedChessPiece;
 
             // Sound
