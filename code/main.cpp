@@ -172,19 +172,21 @@ int main(){
     WhitePawnSprite.setTexture(WhitePawnTexture);
     BlackPawnSprite.setTexture(BlackPawnTexture);
     
-    WhiteKingSprite.setOrigin((WhiteKingSprite.getLocalBounds().width)/2, (WhiteKingSprite.getLocalBounds().height)/2);
-    BlackKingSprite.setOrigin((BlackKingSprite.getLocalBounds().width)/2, (BlackKingSprite.getLocalBounds().height)/2);
-    WhiteQueenSprite.setOrigin((WhiteQueenSprite.getLocalBounds().width)/2, (WhiteQueenSprite.getLocalBounds().height)/2);
-    BlackQueenSprite.setOrigin((BlackQueenSprite.getLocalBounds().width)/2, (BlackQueenSprite.getLocalBounds().height)/2);
-    WhiteBishopSprite.setOrigin((WhiteBishopSprite.getLocalBounds().width)/2, (WhiteBishopSprite.getLocalBounds().height)/2);
-    BlackBishopSprite.setOrigin((BlackBishopSprite.getLocalBounds().width)/2, (BlackBishopSprite.getLocalBounds().height)/2);
-    WhiteKnightSprite.setOrigin((WhiteKnightSprite.getLocalBounds().width)/2, (WhiteKnightSprite.getLocalBounds().height)/2);
-    BlackKnightSprite.setOrigin((BlackKnightSprite.getLocalBounds().width)/2, (BlackKnightSprite.getLocalBounds().height)/2);
-    WhiteRookSprite.setOrigin((WhiteRookSprite.getLocalBounds().width)/2, (WhiteRookSprite.getLocalBounds().height)/2);
-    BlackRookSprite.setOrigin((BlackRookSprite.getLocalBounds().width)/2, (BlackRookSprite.getLocalBounds().height)/2);
-    WhitePawnSprite.setOrigin((WhitePawnSprite.getLocalBounds().width)/2, (WhitePawnSprite.getLocalBounds().height)/2);
-    BlackPawnSprite.setOrigin((BlackPawnSprite.getLocalBounds().width)/2, (BlackPawnSprite.getLocalBounds().height)/2);
-    
+    /*
+    WhiteKingSprite.setOrigin((WhiteKingSprite.getLocalBounds().width)/2, ((WhiteKingSprite.getLocalBounds().height)/2) - 20);
+    BlackKingSprite.setOrigin((BlackKingSprite.getLocalBounds().width)/2, ((BlackKingSprite.getLocalBounds().height)/2) - 20);
+    WhiteQueenSprite.setOrigin((WhiteQueenSprite.getLocalBounds().width)/2, ((WhiteQueenSprite.getLocalBounds().height)/2) - 20);
+    BlackQueenSprite.setOrigin((BlackQueenSprite.getLocalBounds().width)/2, ((BlackQueenSprite.getLocalBounds().height)/2) - 20);
+    WhiteBishopSprite.setOrigin((WhiteBishopSprite.getLocalBounds().width)/2, ((WhiteBishopSprite.getLocalBounds().height)/2) - 20);
+    BlackBishopSprite.setOrigin((BlackBishopSprite.getLocalBounds().width)/2, ((BlackBishopSprite.getLocalBounds().height)/2) - 20);
+    WhiteKnightSprite.setOrigin((WhiteKnightSprite.getLocalBounds().width)/2, ((WhiteKnightSprite.getLocalBounds().height)/2) - 20);
+    BlackKnightSprite.setOrigin((BlackKnightSprite.getLocalBounds().width)/2, ((BlackKnightSprite.getLocalBounds().height)/2) - 20);
+    WhiteRookSprite.setOrigin((WhiteRookSprite.getLocalBounds().width)/2, ((WhiteRookSprite.getLocalBounds().height)/2) - 20);
+    BlackRookSprite.setOrigin((BlackRookSprite.getLocalBounds().width)/2, ((BlackRookSprite.getLocalBounds().height)/2) - 20);
+    WhitePawnSprite.setOrigin((WhitePawnSprite.getLocalBounds().width)/2, ((WhitePawnSprite.getLocalBounds().height)/2) - 20);
+    BlackPawnSprite.setOrigin((BlackPawnSprite.getLocalBounds().width)/2, ((BlackPawnSprite.getLocalBounds().height)/2) - 20);
+    */
+
     const int chessPieceScale = 2;
 
     WhiteKingSprite.setScale(chessPieceScale, chessPieceScale);
@@ -265,8 +267,8 @@ int main(){
             boardLoader(BoardZero.Board);
             cout << BoardZero.Board.size();
             Vector2i mousePosition;
-            MouseState mouseStateOne = Released;
-            vector <ChessPiece*> selectedChessPiece;
+            bool mouseButtonHolding = false;
+            int chessPieceLocation = -1;
 
             // Sound
             Music music;
@@ -301,26 +303,38 @@ int main(){
                         }
 
                         //Mouse Button Press Event Stuff
-
+                        
                         case Event::MouseButtonPressed:
                         {
                             if(event.mouseButton.button == Mouse::Left)
                             {
-                                mouseStateOne = Holding;
+                                mouseButtonHolding = true;
                             }
-                            for(int i = 0; i < BoardZero.Board.size(); i++)
+                            
+                            for(int i = 0; i < BoardZero.Board.size()-1; i++)
                             {
                                 if(Mouse::getPosition().x >= BoardZero.Board[i]->chessSprite.getPosition().x && Mouse::getPosition().x < (BoardZero.Board[i]->chessSprite.getPosition().x + BoardZero.Board[i]->chessSprite.getLocalBounds().width))
                                 {
-                                    if(Mouse::getPosition().y >= BoardZero.Board[i]->chessSprite.getPosition().y && Mouse::getPosition().y < (BoardZero.Board[i]->chessSprite.getPosition().y + BoardZero.Board[i]->chessSprite.getLocalBounds().height))
+                                    if(Mouse::getPosition().y >= ((BoardZero.Board[i]->chessSprite.getPosition().y) + 90) && Mouse::getPosition().y < ((BoardZero.Board[i]->chessSprite.getPosition().y + BoardZero.Board[i]->chessSprite.getLocalBounds().height) + 90))
                                     {
-                                        selectedChessPiece.push_back(BoardZero.Board[i]);
+                                        chessPieceLocation = i;
                                     }
                                 }
                             }
                             //mousePosition = Mouse::getPosition();
                             break;
                         }
+
+                        case Event::MouseButtonReleased:
+                        {
+                            if(event.mouseButton.button == Mouse::Left)
+                            {
+                                mouseButtonHolding = false;
+                            }
+                        }
+
+
+                        
 
                         //Mouse Move Event Stuff
 
@@ -339,9 +353,10 @@ int main(){
                 ********************************************
                 \*----------------------------------------*/
                 
-                if(mouseStateOne == Holding)
+                if(mouseButtonHolding == true && chessPieceLocation != -1)
                 {
-                    selectedChessPiece[0]->chessSprite.setPosition(Mouse::getPosition().x, Mouse::getPosition().y);
+                    BoardZero.Board[chessPieceLocation]->chessSprite.setPosition(Mouse::getPosition().x, Mouse::getPosition().y);
+                    BoardZero.Board[0]->chessSprite.setPosition(BoardZero.Board[0]->chessSprite.getPosition().x - 40, BoardZero.Board[0]->chessSprite.getPosition().y - 100);
                 }
 
                 /*--------------------------------------*\
