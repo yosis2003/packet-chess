@@ -27,6 +27,9 @@ class ChessPiece
     Sprite getSprite();
     void positionSetter(Vector2f pos);
     void previousPositionSetter(Vector2f pos);
+    bool hasMoved();
     bool hasDoubleMoved();
+    bool moved;
+
 
 };

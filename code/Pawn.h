@@ -4,7 +4,6 @@
 class Pawn : public ChessPiece
 {
     private:
-    bool moved;
     int epGraves;
 
     public:

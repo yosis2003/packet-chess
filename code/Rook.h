@@ -4,7 +4,6 @@
 class Rook : public ChessPiece
 {
     private:
-    bool moved;
     vector <Vector2f> RookLegalMoves;
 
     public:

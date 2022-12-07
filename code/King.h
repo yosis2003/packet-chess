@@ -3,10 +3,6 @@
 
 class King : public ChessPiece
 {
-    private:
-    bool moved; //the king piece has moved only if current pos is different from lastPos
-    bool inCheck = false;
-
     public:
     King(Vector2f pos, int color, Sprite sprite);
     bool isLegal(Vector2f testPos, vector<ChessPiece*> chessVec); //Try the override keyword later

@@ -43,6 +43,14 @@ bool ChessPiece::hasDoubleMoved() {
         return true;
     }
     else {
+        return false;
+    }
+}
+bool ChessPiece::hasMoved() {
+    if (moved == true) {
         return true;
+    }
+    else {
+        return false;
     }
 }
