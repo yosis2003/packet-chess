@@ -26,26 +26,52 @@ bool Rook::isLegal(Vector2f testPos, vector<ChessPiece*> chessVec){
             }
         }
     }
-    if (getPosition().x == testPos.x || getPosition().y == testPos.y){
+    if (position.x == testPos.x || position.y == testPos.y){
+        if((position.x - testPos.x) > 0)
+        {
+            for(int i = 0; i < chessVec.size(); i++)
+            {
+                if(chessVec[i]->getPosition().x < position.x && chessVec[i]->getPosition().x > testPos.x && position.y == chessVec[i]->getPosition().y)
+                {
+                    return false;
+                }
+            }
+        }
+        else if((position.x - testPos.x) < 0)
+        {
+            for(int i = 0; i < chessVec.size(); i++)
+            {
+                if(chessVec[i]->getPosition().x > position.x && chessVec[i]->getPosition().x < testPos.x && position.y == chessVec[i]->getPosition().y)
+                {
+                    return false;
+                }
+            }
+        }
+        else if((position.y - testPos.y) < 0)
+        {
+            for(int i = 0; i < chessVec.size(); i++)
+            {
+                if(chessVec[i]->getPosition().y > position.y && chessVec[i]->getPosition().y < testPos.y && position.x == chessVec[i]->getPosition().x)
+                {
+                    return false;
+                }
+            }
+        }
+        else if((position.y - testPos.y) > 0)
+        {
+            for(int i = 0; i < chessVec.size(); i++)
+            {
+                if(chessVec[i]->getPosition().y < position.y && chessVec[i]->getPosition().y > testPos.y && position.x == chessVec[i]->getPosition().x)
+                {
+                    return false;
+                }
+            }
+        }
         return true;
     }
     else {
         return false;
     }
-    /*
-    Vector2f Difference(testPos.x - position.x, testPos.y - position.y);
-    for(int i = 0; i < RookLegalMoves.size(); i++)
-    {
-        if(Difference.x == RookLegalMoves[i].x && Difference.y == RookLegalMoves[i].y)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-    */
 }
 Rook::Rook(Vector2f pos, int passedColor, Sprite sprite)  : ChessPiece(pos, passedColor){
     prevPos = pos;

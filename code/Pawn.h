@@ -10,5 +10,5 @@ class Pawn : public ChessPiece
     public:
     Pawn(Vector2f pos, int color, Sprite sprite);
     bool hasMoved();
-    bool isLegal(Vector2f testPos, vector<ChessPiece*> chessVec); //Try the override keyword later
+    bool isLegal(Vector2f testPos, vector<ChessPiece*> chessVec);
 };

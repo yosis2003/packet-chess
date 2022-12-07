@@ -39,6 +39,34 @@ bool Pawn::isLegal(Vector2f testPos, vector<ChessPiece*> chessVec){
             }
             if((testPos.y - position.y) == -2 && (testPos.x-position.x == 0))
             {
+                for(int i = 0; i < chessVec.size(); i++)
+                {
+                    if(chessVec[i]->getPosition() == testPos)
+                    {
+                        return false;
+                    }
+                }
+
+                if((position.y - testPos.y) < 0)
+                {
+                    for(int i = 0; i < chessVec.size(); i++)
+                    {
+                        if(chessVec[i]->getPosition().y > position.y && chessVec[i]->getPosition().y < testPos.y && position.x == chessVec[i]->getPosition().x)
+                        {
+                            return false;
+                        }
+                    }
+                }
+                else if((position.y - testPos.y) > 0)
+                {
+                    for(int i = 0; i < chessVec.size(); i++)
+                    {
+                        if(chessVec[i]->getPosition().y < position.y && chessVec[i]->getPosition().y > testPos.y && position.x == chessVec[i]->getPosition().x)
+                        {
+                            return false;
+                        }
+                    }
+                }
                 if(moved == false)
                 {
                     moved = true;
@@ -70,6 +98,7 @@ bool Pawn::isLegal(Vector2f testPos, vector<ChessPiece*> chessVec){
                         return true;
                     }
                 }
+                return false;
             }    
         }
         else {
@@ -88,6 +117,13 @@ bool Pawn::isLegal(Vector2f testPos, vector<ChessPiece*> chessVec){
             }
             if((testPos.y - position.y) == 2 && (testPos.x-position.x == 0))
             {
+                for(int i = 0; i < chessVec.size(); i++)
+                {
+                    if(chessVec[i]->getPosition() == testPos)
+                    {
+                        return false;
+                    }
+                }
                 if(moved == false)
                 {
                     moved = true;
@@ -120,6 +156,7 @@ bool Pawn::isLegal(Vector2f testPos, vector<ChessPiece*> chessVec){
                         return true;
                     }
                 }
+                return false;
             }
         }
         else {

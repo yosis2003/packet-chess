@@ -26,6 +26,46 @@ bool Bishop::isLegal(Vector2f testPos,  vector<ChessPiece*> chessVec){
     }
     if (abs(testPos.x - position.x) == abs(testPos.y - position.y))
     {
+        if((testPos.x - position.x) > 0 && (testPos.y - position.y) > 0) // Down and to the right
+        {
+            for(int i = 0; i < chessVec.size(); i++)
+            {
+                if(chessVec[i]->getPosition().x < testPos.x && chessVec[i]->getPosition().y < testPos.y && chessVec[i]->getPosition().x > position.x && chessVec[i]->getPosition().y > position.y && abs(chessVec[i]->getPosition().x - testPos.x) == abs(chessVec[i]->getPosition().y - testPos.y))
+                {
+                    return false;
+                }
+            }
+        }
+        else if((testPos.x - position.x) > 0 && (testPos.y - position.y) < 0) // Up and to the right
+        {
+            for(int i = 0; i < chessVec.size(); i++)
+            {
+                if(chessVec[i]->getPosition().x < testPos.x && chessVec[i]->getPosition().y > testPos.y && chessVec[i]->getPosition().x > position.x && chessVec[i]->getPosition().y < position.y && abs(chessVec[i]->getPosition().x - testPos.x) == abs(chessVec[i]->getPosition().y - testPos.y))
+                {
+                    return false;
+                }
+            }
+        }
+        else if((testPos.x - position.x) < 0 && (testPos.y - position.y) > 0) // Down and to the left
+        {
+            for(int i = 0; i < chessVec.size(); i++)
+            {
+                if(chessVec[i]->getPosition().x > testPos.x && chessVec[i]->getPosition().y < testPos.y && chessVec[i]->getPosition().x < position.x && chessVec[i]->getPosition().y > position.y && abs(chessVec[i]->getPosition().x - testPos.x) == abs(chessVec[i]->getPosition().y - testPos.y))
+                {
+                    return false;
+                }
+            }
+        }
+        else if((testPos.x - position.x) < 0 && (testPos.y - position.y) < 0) // Up and to the left
+        {
+            for(int i = 0; i < chessVec.size(); i++)
+            {
+                if(chessVec[i]->getPosition().x > testPos.x && chessVec[i]->getPosition().y > testPos.y && chessVec[i]->getPosition().x < position.x && chessVec[i]->getPosition().y < position.y && abs(chessVec[i]->getPosition().x - testPos.x) == abs(chessVec[i]->getPosition().y - testPos.y))
+                {
+                    return false;
+                }
+            }
+        }
         return true;
     }
     else{
