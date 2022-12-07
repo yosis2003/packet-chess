@@ -663,7 +663,6 @@ int main(){
                                 }
                             }
                         }
-
                         for(int j = 0; j < boardTiles.size(); j++)
                         {
                             if(BoardZero.Board[chessPieceLocation]->getPosition() == boardTiles[j]->getMatrix())

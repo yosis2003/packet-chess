@@ -14,6 +14,7 @@ class ChessPiece
     int color = 0;//0 is black 1 is white
     Vector2f position;
     Vector2f prevPos;
+    bool doublemoved;
 
     public:
     Sprite chessSprite;
@@ -26,5 +27,6 @@ class ChessPiece
     Sprite getSprite();
     void positionSetter(Vector2f pos);
     void previousPositionSetter(Vector2f pos);
+    bool hasDoubleMoved();
 
 };

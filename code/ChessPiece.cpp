@@ -37,3 +37,12 @@ Sprite ChessPiece::getSprite(){
 void ChessPiece::previousPositionSetter(Vector2f pos) {
     pos = prevPos;
 }
+
+bool ChessPiece::hasDoubleMoved() {
+    if (doublemoved == true) {
+        return true;
+    }
+    else {
+        return true;
+    }
+}

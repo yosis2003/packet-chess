@@ -53,7 +53,7 @@ Rook::Rook(Vector2f pos, int passedColor, Sprite sprite)  : ChessPiece(pos, pass
     color = passedColor;
     value = 5;
     chessSprite = sprite;
-    vector <Vector2f> RookLegal;
+    //vector <Vector2f> RookLegal;
     
     /*
     for (int i = 1; i <= 7; i++)
