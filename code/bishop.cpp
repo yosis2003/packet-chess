@@ -13,7 +13,17 @@ Bishop::Bishop(Vector2f pos, int passedColor, Sprite sprite) : ChessPiece(pos, p
 
 }
 
-bool Bishop::isLegal(Vector2f testPos){
+bool Bishop::isLegal(Vector2f testPos,  vector<ChessPiece*> chessVec){
+    for(int i = 0; i < chessVec.size(); i++)
+    {
+        if(chessVec[i]->getColor() == color)
+        {
+            if(chessVec[i]->getPosition() == testPos)
+            {
+                return false;
+            }
+        }
+    }
     if (abs(testPos.x) == abs(testPos.y)){
         return true;
     }

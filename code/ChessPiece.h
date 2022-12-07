@@ -17,7 +17,7 @@ class ChessPiece
 
     public:
     Sprite chessSprite;
-    virtual bool isLegal(Vector2f testPos) = 0;
+    virtual bool isLegal(Vector2f testPos, vector<ChessPiece*> chessVec) = 0;
     Vector2f getPosition();
     ChessPiece(Vector2f positioning, int coloring);
     Vector2f getLastPos();

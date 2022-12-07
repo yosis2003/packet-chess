@@ -26,9 +26,10 @@ int ChessPiece::getColor(){
 void ChessPiece::positionSetter(Vector2f pos) {
     position = pos;
 }
-//bool ChessPiece::isLegal(Vector2f testPos){
+/*bool ChessPiece::isLegal(Vector2f testPos, vector<ChessPiece*> chessVec) {
+    return false;
 
-//}
+}*/
 Sprite ChessPiece::getSprite(){
     return chessSprite;
 }

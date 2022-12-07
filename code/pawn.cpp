@@ -13,7 +13,17 @@ bool Pawn::hasMoved(){
         return false;
     }
 }
-bool Pawn::isLegal(Vector2f testPos){
+bool Pawn::isLegal(Vector2f testPos, vector<ChessPiece*> chessVec){
+    for(int i = 0; i < chessVec.size(); i++)
+    {
+        if(chessVec[i]->getColor() == color)
+        {
+            if(chessVec[i]->getPosition() == testPos)
+            {
+                return false;
+            }
+        }
+    }
     if (abs(testPos.x - getLastPos().x) > 1 || (abs(testPos.y - getLastPos().y) > 2 ||abs(testPos.y - getLastPos().y) < 1)){
         return false;
     }

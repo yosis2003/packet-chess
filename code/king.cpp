@@ -27,7 +27,17 @@ King::King(Vector2f pos, int passedColor, Sprite sprite) : ChessPiece(pos, passe
     chessSprite = sprite;
     
 }
-bool King::isLegal(Vector2f testPos){
+bool King::isLegal(Vector2f testPos, vector<ChessPiece*> chessVec){
+    for(int i = 0; i < chessVec.size(); i++)
+    {
+        if(chessVec[i]->getColor() == color)
+        {
+            if(chessVec[i]->getPosition() == testPos)
+            {
+                return false;
+            }
+        }
+    }
     if (abs(testPos.x - getLastPos().x) > 1 || abs(testPos.y - getLastPos().y) > 1){
         return false;
     }

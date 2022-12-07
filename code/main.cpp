@@ -540,6 +540,7 @@ int main(){
                             {
                                 mouseButtonHolding = true;
                             }
+                            /*
                             else if(event.mouseButton.button == Mouse::Right)
                             {
                                 for(int i = 0; i < BoardZero.Board.size(); i++)
@@ -554,6 +555,7 @@ int main(){
                                     }
                                 }
                             }
+                            */
                             
                             for(int i = 0; i < BoardZero.Board.size(); i++)
                             {
@@ -619,44 +621,46 @@ int main(){
                         // Find Closest Tile
                         int nearestTile = closestTileCalculator(boardTiles, BoardZero.Board, chessPieceLocation);
                         // Set Sprite to Tile Position
-                        BoardZero.Board[chessPieceLocation]->chessSprite.setPosition(boardTiles[nearestTile]->getCenter().x, boardTiles[nearestTile]->getCenter().y);
-                        boardTiles[nearestTile]->Defenders.push_back(BoardZero.Board[chessPieceLocation]);
-                        BoardZero.Board[chessPieceLocation]->previousPositionSetter(BoardZero.Board[chessPieceLocation]->getPosition());
-                        BoardZero.Board[chessPieceLocation]->positionSetter(boardTiles[nearestTile]->getMatrix());
-                        for(int i = 0; i < BoardZero.Board.size(); i++)
+                        if(BoardZero.Board[chessPieceLocation]->isLegal(boardTiles[nearestTile]->getMatrix(), BoardZero.Board))
                         {
-                            for(int j = 0; j < BoardZero.Board.size(); j++)
+                            BoardZero.Board[chessPieceLocation]->chessSprite.setPosition(boardTiles[nearestTile]->getCenter().x, boardTiles[nearestTile]->getCenter().y);
+                            boardTiles[nearestTile]->Defenders.push_back(BoardZero.Board[chessPieceLocation]);
+                            BoardZero.Board[chessPieceLocation]->previousPositionSetter(BoardZero.Board[chessPieceLocation]->getPosition());
+                            BoardZero.Board[chessPieceLocation]->positionSetter(boardTiles[nearestTile]->getMatrix());
+                            for(int i = 0; i < BoardZero.Board.size(); i++)
                             {
-                                if (BoardZero.Board[j]->getPosition() == BoardZero.Board[i]->getPosition() && i != j)
+                                for(int j = 0; j < BoardZero.Board.size(); j++)
                                 {
-                                    if(BoardZero.Board[j]->getColor() != BoardZero.Board[i]->getColor())
+                                    if (BoardZero.Board[j]->getPosition() == BoardZero.Board[i]->getPosition() && i != j)
                                     {
-                                        if(i == chessPieceLocation)
+                                        if(BoardZero.Board[j]->getColor() != BoardZero.Board[i]->getColor())
                                         {
-                                            BoardZero.Board[j]->positionSetter(Vector2f(10, 10));
-                                            BoardZero.Board[j]->chessSprite.setPosition(100, 100 + deadPositionIter);
-                                            BoardDead.Board.push_back(BoardZero.Board[j]);
-                                            deadPositionIter = 50 * BoardDead.Board.size();
-
-                                            for(int k = 0; k < boardTiles.size(); k++)
+                                            if(i == chessPieceLocation)
                                             {
-                                                if(boardTiles[k]->getMatrix() == BoardZero.Board[i]->getPosition())
+                                                BoardZero.Board[j]->positionSetter(Vector2f(10, 10));
+                                                BoardZero.Board[j]->chessSprite.setPosition(100, 100 + deadPositionIter);
+                                                BoardDead.Board.push_back(BoardZero.Board[j]);
+                                                deadPositionIter = 50 * BoardDead.Board.size();
+
+                                                for(int k = 0; k < boardTiles.size(); k++)
                                                 {
-                                                    boardTiles[k]->Defenders.clear();
-                                                    boardTiles[k]->Defenders.push_back(BoardZero.Board[i]);
+                                                    if(boardTiles[k]->getMatrix() == BoardZero.Board[i]->getPosition())
+                                                    {
+                                                        boardTiles[k]->Defenders.clear();
+                                                        boardTiles[k]->Defenders.push_back(BoardZero.Board[i]);
+                                                    }
                                                 }
                                             }
-                                        }
-                                        else if(j == chessPieceLocation)
-                                        {
-                                            BoardZero.Board[i]->positionSetter(Vector2f(10, 10));
-                                            BoardZero.Board[i]->chessSprite.setPosition(100, 100 + deadPositionIter);
-                                            BoardDead.Board.push_back(BoardZero.Board[i]);
-                                            deadPositionIter = 50 * BoardDead.Board.size();
+                                            else if(j == chessPieceLocation)
+                                            {
+                                                BoardZero.Board[i]->positionSetter(Vector2f(10, 10));
+                                                BoardZero.Board[i]->chessSprite.setPosition(100, 100 + deadPositionIter);
+                                                BoardDead.Board.push_back(BoardZero.Board[i]);
+                                                deadPositionIter = 50 * BoardDead.Board.size();
+                                            }
                                         }
                                     }
                                 }
-                                
                             }
                         }
 
