@@ -22,7 +22,8 @@ bool Knight::isLegal(Vector2f testPos, vector<ChessPiece*> chessVec){
             }
         }
     }
-    if (abs(testPos.x - getLastPos().x == 2) && abs(testPos.y - getLastPos().y == 1) || (abs(testPos.x - getLastPos().x) == 1) && (abs(testPos.y - getLastPos().y) == 2)){
+
+    if (abs(testPos.x - position.x) == 2 && abs(testPos.y - position.y) == 1 || (abs(testPos.x - position.x) == 1 && abs(testPos.y - position.y) == 2)){
         return true;
     }
     else{
