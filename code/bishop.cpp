@@ -24,7 +24,8 @@ bool Bishop::isLegal(Vector2f testPos,  vector<ChessPiece*> chessVec){
             }
         }
     }
-    if (abs(testPos.x) == abs(testPos.y)){
+    if (abs(testPos.x - position.x) == abs(testPos.y - position.y))
+    {
         return true;
     }
     else{
