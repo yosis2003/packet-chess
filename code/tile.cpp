@@ -17,3 +17,8 @@ Vector2f Tile::getCenter()
 {
     return center;
 }
+
+Vector2f Tile::getMatrix()
+{
+    return matrixPos;
+}

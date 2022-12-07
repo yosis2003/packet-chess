@@ -12,10 +12,11 @@ class Tile
     Vector2f upperLeft;
     Vector2f lowerRight;
     Vector2f center;
-    Vector2f matrixPos;
+    Vector2f matrixPos; //chess board piece positions starts at 0,0 goes to 7,7
 
     public:
     Vector2f getCenter();
-    vector <ChessPiece> Defenders;
+    vector <ChessPiece*> Defenders;
     Tile(Vector2f topLeft, Vector2f botRight, Vector2f matPos);
+    Vector2f getMatrix();
 };

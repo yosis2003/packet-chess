@@ -324,11 +324,24 @@ void boardInitializer(vector<Tile*> TV, vector<ChessPiece*> ChessVect)
     //Board Position Initializer
     for(int i = 0; i <= 15; i++)
     {
-        ChessVect[i]->chessSprite.setPosition(TV[i]->getCenter().x, TV[i]->getCenter().y);
+        ChessVect[i]->previousPositionSetter(TV[i]->getMatrix());
+        ChessVect[i]->positionSetter(TV[i]->getMatrix());
     }
     for(int i = 0; i <= 15; i++)
     {
-        ChessVect[i+16]->chessSprite.setPosition(TV[i+48]->getCenter().x, TV[i+48]->getCenter().y);
+        ChessVect[i + 16]->previousPositionSetter(TV[i+48]->getMatrix());
+        ChessVect[i + 16]->positionSetter(TV[i+48]->getMatrix());
+    }
+
+    for (int i = 0; i < ChessVect.size(); i++)
+    {
+        for(int j = 0; j < TV.size(); j++)
+        {
+            if(ChessVect[i]->getPosition() == TV[j]->getMatrix())
+            {
+                ChessVect[i]->chessSprite.setPosition(TV[j]->getCenter());        
+            }
+        }
     }
 }
 
@@ -480,6 +493,7 @@ int main(){
             vector <Tile*> boardTiles;
             tileLoader(boardTiles);
             int deadPositionIter = 0;
+            BoardState BoardDead;
 
             // Sound
             Music music;
@@ -492,7 +506,13 @@ int main(){
             boardInitializer(boardTiles, BoardZero.Board);
             
             while(gameState == PLAYING && window.isOpen())
+
             {
+                if (music.getStatus() == Music::Stopped) { //plays the music
+                    cout << "music restarting" << endl;
+                    music.stop();
+                    music.play();
+                }
 
                 while(window.pollEvent(event))
                 {
@@ -555,7 +575,8 @@ int main(){
                             {
                                 mouseButtonHolding = false;
                                 clipTime = true;
-                            }                            
+                            }
+                            
                         }
 
 
@@ -590,7 +611,7 @@ int main(){
                     BoardZero.Board[chessPieceLocation]->chessSprite.setPosition(Mouse::getPosition().x, Mouse::getPosition().y - 50);
                     //BoardZero.Board[chessPieceLocation]->chessSprite.setPosition(BoardZero.Board[chessPieceLocation]->chessSprite.getPosition().x, BoardZero.Board[chessPieceLocation]->chessSprite.getPosition().y);
                 }
-                else if(mouseButtonHolding == false && clipTime == true)
+                else if(mouseButtonHolding == false && clipTime == true )
                 {
                     if(chessPieceLocation != -1)
                     {
@@ -599,11 +620,57 @@ int main(){
                         int nearestTile = closestTileCalculator(boardTiles, BoardZero.Board, chessPieceLocation);
                         // Set Sprite to Tile Position
                         BoardZero.Board[chessPieceLocation]->chessSprite.setPosition(boardTiles[nearestTile]->getCenter().x, boardTiles[nearestTile]->getCenter().y);
-                        // BoardZero.Board[0]->chessSprite.setPosition()
+                        boardTiles[nearestTile]->Defenders.push_back(BoardZero.Board[chessPieceLocation]);
+                        BoardZero.Board[chessPieceLocation]->previousPositionSetter(BoardZero.Board[chessPieceLocation]->getPosition());
+                        BoardZero.Board[chessPieceLocation]->positionSetter(boardTiles[nearestTile]->getMatrix());
+                        for(int i = 0; i < BoardZero.Board.size(); i++)
+                        {
+                            for(int j = 0; j < BoardZero.Board.size(); j++)
+                            {
+                                if (BoardZero.Board[j]->getPosition() == BoardZero.Board[i]->getPosition() && i != j)
+                                {
+                                    if(BoardZero.Board[j]->getColor() != BoardZero.Board[i]->getColor())
+                                    {
+                                        if(i == chessPieceLocation)
+                                        {
+                                            BoardZero.Board[j]->positionSetter(Vector2f(10, 10));
+                                            BoardZero.Board[j]->chessSprite.setPosition(100, 100 + deadPositionIter);
+                                            BoardDead.Board.push_back(BoardZero.Board[j]);
+                                            deadPositionIter = 50 * BoardDead.Board.size();
+
+                                            for(int k = 0; k < boardTiles.size(); k++)
+                                            {
+                                                if(boardTiles[k]->getMatrix() == BoardZero.Board[i]->getPosition())
+                                                {
+                                                    boardTiles[k]->Defenders.clear();
+                                                    boardTiles[k]->Defenders.push_back(BoardZero.Board[i]);
+                                                }
+                                            }
+                                        }
+                                        else if(j == chessPieceLocation)
+                                        {
+                                            BoardZero.Board[i]->positionSetter(Vector2f(10, 10));
+                                            BoardZero.Board[i]->chessSprite.setPosition(100, 100 + deadPositionIter);
+                                            BoardDead.Board.push_back(BoardZero.Board[i]);
+                                            deadPositionIter = 50 * BoardDead.Board.size();
+                                        }
+                                    }
+                                }
+                                
+                            }
+                        }
+
+                        for(int j = 0; j < boardTiles.size(); j++)
+                        {
+                            if(BoardZero.Board[chessPieceLocation]->getPosition() == boardTiles[j]->getMatrix())
+                            {
+                                BoardZero.Board[chessPieceLocation]->chessSprite.setPosition(boardTiles[j]->getCenter());                            
+                            }
+                        }
                     }
                     //cleanup
-                        chessPieceLocation = -1;
-                        clipTime = false;
+                    chessPieceLocation = -1;
+                    clipTime = false;
                 }
 
                 /*--------------------------------------*\

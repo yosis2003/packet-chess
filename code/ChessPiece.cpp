@@ -22,9 +22,17 @@ int ChessPiece::getValue(){
 int ChessPiece::getColor(){
     return color;
 }
+
+void ChessPiece::positionSetter(Vector2f pos) {
+    position = pos;
+}
 //bool ChessPiece::isLegal(Vector2f testPos){
 
 //}
 Sprite ChessPiece::getSprite(){
     return chessSprite;
+}
+
+void ChessPiece::previousPositionSetter(Vector2f pos) {
+    pos = prevPos;
 }
